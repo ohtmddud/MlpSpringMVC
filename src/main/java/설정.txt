@@ -1,0 +1,84 @@
+<<스프링 MVC 프로젝트 구성>>
+ 1. web.xml 에 DispatcherServlet 등록 여부 확인
+ 2. 설정 파일의 경로를 변경한 경우 수정
+ 3. 패키지 작성하고 컨트롤러나 DAO, Service, .... 와 같은 클래스 작성
+	→ component-scan 등록
+ 4. view 는 /WEB-INF/views 폴더에 작성
+ 
+<<스프링 MVC 아키텍쳐>>
+ 1. 스프링 MVC 는 역할을 분리
+  - DispatcherServlet: 모든 요청을 받아서 요청 분석
+  - HandlerMapping: 컨트롤러 찾기
+  - HandlerAdapter: 컨트롤러 실행
+  - Controller: 개발자가 웹에서 처리하고 싶은 내용을 기술(서블릿에서 작업했던 내용을 정의)
+  - ViewResolver: View 의 정보를 기반으로 어떤 View 를 response 해야 하는지 확인네
+  - View: 실제 응답할 뷰
+ 
+<<컨트롤러>>
+ 1. @RequestMapping 이 정의 된 메소드
+  1) 매개변수:
+   - String → 파라미터명과 동일하게 정의, View에서 넘겨주는 파라미터를 추출(=request.getParameter)
+   - DTO → 입력하는 모든 파라미터를 DTO 로 만들어서 넘겨준다.(스프링 MVC 내부에서)
+   
+  2) 리턴타입
+   - String → View 의 정보
+   - ModelAndView → Model 은 뷰(JSP) 에 공유 할 데이터 / View 는 뷰의 정보 
+   
+<<MyBatis>>
+ 1. pom.xml 에 라이브러리 등록하기
+  - Mybatis
+  - Mybatis-Spring
+ 
+ 2. 스프링 설정 파일에 Mybatis 와 관련 라이브러리를 등록
+  - SqlSessionFactoryBean 을 등록
+   → Spring 과 Mybatis 을 연결(호환)
+   → Mybatis 와 오라클의 연결을 관리
+   
+  - SqlSessionTemplate 을 등록
+   → Mybatis 의 핵심 클래스
+   → sql을 실행할 수 있도록 기능을 제공하는 클래스
+   → Spring jdbc 에서 JdbcTemplate 와 같은 역할
+   
+ 3. Mybatis 의 전체 설정 정보를 담고 있는 Main 설정 파일(=configuration 설정 파일) 을 작성
+ 
+ 4. sql문을 정의한 mapper 작성(xml로 작성)
+ 
+ 
+# 정리
+ - jsp/jstl (서블릿으로 변환)
+ - thymeleaf (html)
+ 
+ - tiles 사용
+
+ - spring mvc 프로젝트
+ - mybatis
+  * 오라클
+  * spring jdbc
+  * mybatis
+  
+ - pom.xml 에서 라이브러리 등록
+ - spring-config.xml 에 빈 등록
+ 
+ - 컨트롤러 공유된 데이터 꺼내서 출력
+ - 조건
+ - 반복
+ - 링크
+ - 레이아웃
+ 
+ <<Tiles 레이아웃>>
+  1. pom.xml 에 라이브러리 등록
+  2. 중요한 빈을 설정 파일에 등록
+   - JSP 파일을 만들 수 있는 ViewResolver 를 이용
+   - Tiles를 기반으로 뷰를 만들어 낼 수 있도록 ViewResolver 등록
+   - Thymeleaf 를 사용하더라도 Thymeleaf를 적용해서 view를 만들 수 있도록 ViewResolver 등록
+   
+  3. Tiles 메인 설정 파일을 작성
+   - 뷰 템플릿을 등록, 뷰 등록
+  
+  4. Layout 템플릿 파일을 작성 (mainLayout.jsp)
+   - 전체 레이아웃을 어떻게 구성 할 것인지 JSP 파일을 만든다.
+   
+  5. 
+   
+ 
+ 
